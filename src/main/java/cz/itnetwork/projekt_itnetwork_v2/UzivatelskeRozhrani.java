@@ -36,7 +36,7 @@ public class UzivatelskeRozhrani {
         System.out.println("1 – Přidat nového pojištěného");
         System.out.println("2 – Vypsat všechny pojištěné");
         System.out.println("3 – Vyhledat pojištěného");
-        System.out.println("4 – Konac");
+        System.out.println("4 – Konec");
     }
 
     /**
