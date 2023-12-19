@@ -14,6 +14,7 @@ public class UzivatelskeRozhrani {
 
     private Databaze_pojistencu pojistenciDatabaze;
     private Scanner scanner;
+    private boolean spravneZadani;
 
     /**
      * instance uživatelského rozhraní
@@ -40,7 +41,35 @@ public class UzivatelskeRozhrani {
     }
 
     /**
-     * pomocna metoda pro získání jména
+     * metoda sloužící k ověření, zda zadaný text (např. jméno nebo příjmení)
+     * obsahuje číslici
+     *
+     * @param analyzovanyText
+     * @return true nebo false
+     */
+    boolean obsahujeCislici(String analyzovanyText) {
+        char[] cislice = analyzovanyText.toCharArray();
+        for (char znak : cislice) {
+            if (Character.isDigit(znak)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * metoda sloužící k ověření, zda je zadaný text (např. jméno nebo příjmení)
+     * prázdný
+     *
+     * @param analyzovanyText
+     * @return true nebo false
+     */
+    boolean jePrazdny(String analyzovanyText) {
+        return analyzovanyText.equals("");
+    }
+
+    /**
+     * metoda pro získání jména
      *
      * @return jmenoPojisteneho
      */
@@ -48,26 +77,20 @@ public class UzivatelskeRozhrani {
         /**
          * kontrola spravného zadání jména
          */
-        boolean spravneZadani = false;
+        spravneZadani = false;
         String jmenoPojisteneho = "";
-
         while (!spravneZadani) {
             System.out.println("Zadejte jméno pojištěnce:");
             try {
                 jmenoPojisteneho = scanner.nextLine().trim();
-
-                /**
-                 * kontrola, zda jméno obsahuje číslice
-                 */
-                char[] cislice = jmenoPojisteneho.toCharArray();
-                for (char znak : cislice) {
-                    if (Character.isDigit(znak)) {
-                        System.out.println("Jméno nemůže obsahovat číslice.");
-                        spravneZadani = false;
-                        break;
-                    } else {
-                        spravneZadani = true;
-                    }
+                // kontrola, zda jméno obsahuje číslice                 
+                if (obsahujeCislici(jmenoPojisteneho)) {
+                    System.out.println("Jméno nemůže obsahovat číslice.");
+                } // kontrola, zda je jméno prázdné
+                else if (jePrazdny(jmenoPojisteneho)) {
+                    System.out.println("Jméno nemůže být prázdné");
+                } else {
+                    spravneZadani = true;
                 }
             } catch (Exception vyjimka) {
                 System.out.println("Chybně zadané jméno.");
@@ -77,7 +100,7 @@ public class UzivatelskeRozhrani {
     }
 
     /**
-     * pomocná metoda pro získání příjmení
+     * metoda pro získání příjmení
      *
      * @return prijmeniPojisteneho
      */
@@ -85,26 +108,20 @@ public class UzivatelskeRozhrani {
         /**
          * kontrola správného zadání příjmení
          */
-        boolean spravneZadani = false;
+        spravneZadani = false;
         String prijmeniPojisteneho = "";
         while (!spravneZadani) {
             System.out.println("Zadejte příjmení pojištěnce:");
-
             try {
                 prijmeniPojisteneho = scanner.nextLine().trim();
-
-                /**
-                 * kontrola, zda příjmení obsahuje číslice
-                 */
-                char[] cislice = prijmeniPojisteneho.toCharArray();
-                for (char znak : cislice) {
-                    if (Character.isDigit(znak)) {
-                        System.out.println("Příjmení nemůže obsahovat číslice.");
-                        spravneZadani = false;
-                        break;
-                    } else {
-                        spravneZadani = true;
-                    }
+                // kontrola, zda příjmení obsahuje číslice
+                if (obsahujeCislici(prijmeniPojisteneho)) {
+                    System.out.println("Příjmení nemůže obsahovat číslice.");
+                } // kontrola, zda je příjmení prázdné
+                else if (jePrazdny(prijmeniPojisteneho)) {
+                    System.out.println("Příjmení nemůže být prázdné");
+                } else {
+                    spravneZadani = true;
                 }
             } catch (Exception vyjimka) {
                 System.out.println("Chybně zadané příjmení.");
@@ -114,7 +131,7 @@ public class UzivatelskeRozhrani {
     }
 
     /**
-     * pomocná metoda pro získání telefonního čísla
+     * metoda pro získání telefonního čísla
      *
      * @return telefonPojisteneho
      */
@@ -124,7 +141,7 @@ public class UzivatelskeRozhrani {
          * kontrola, zda uživatel správně zadal telefonní číslo
          */
         String telefonPojisteneho = "";
-        boolean spravneZadani = false;
+        spravneZadani = false;
         while (!spravneZadani) {
             System.out.println("Zadejte telefonní číslo pojištěnce:");
             try {
@@ -138,7 +155,7 @@ public class UzivatelskeRozhrani {
     }
 
     /**
-     * pomocná metoda pro získání věku
+     * metoda pro získání věku
      *
      * @return vekPojisteneho
      */
@@ -148,7 +165,7 @@ public class UzivatelskeRozhrani {
          * kontrola, zda uživatel správně zadal věk
          */
         int vekPojisteneho = 0;
-        boolean spravneZadani = false;
+        spravneZadani = false;
         while (!spravneZadani) {
             System.out.println("Zadejte věk pojištěnce:");
             try {
@@ -172,17 +189,24 @@ public class UzivatelskeRozhrani {
     }
 
     /**
+     * metoda oznamující uživateli, že je databáze prázdná
+     */
+    String prazdnaDatabaze() {
+        return "Databáze pojištěnců je prázdná.";
+    }
+
+    /**
      * metoda pro výpis pojištěnců
      */
     void vypisPojistence() {
-        if (!pojistenciDatabaze.getZaznamyPojistencu().isEmpty()) {
-            for (Pojistenec pojistenec : pojistenciDatabaze.getZaznamyPojistencu()) {
-                System.out.println(pojistenec);
-            }
-            stiskniEnter();
+
+        if (pojistenciDatabaze.jePrazdna()) {
+            System.out.println(prazdnaDatabaze());
         } else {
-            System.out.println("Databáze pojištěnců je prázdná.");
+            pojistenciDatabaze.vypisZaznamyPojistencu(pojistenciDatabaze.getZaznamyPojistencu());                              
         }
+        stiskniEnter();
+
     }
 
     /**

@@ -69,5 +69,4 @@ public class Pojistenec {
     public String toString() {
         return jmeno + "  " + prijmeni + "  " + vek + "  " + telefonniCislo;
     }
-
 }

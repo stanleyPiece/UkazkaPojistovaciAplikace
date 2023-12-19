@@ -16,14 +16,26 @@ import java.util.Scanner;
 public class Databaze_pojistencu {
 
     private List<Pojistenec> pojistenci;
-    private Scanner scanner;    
+    private List<Pojistenec> pojistenciNemodifikovatelni;
+    private Scanner scanner;
+    //private List<Pojistenec> pojistenciNemodifikovatelni;
 
     /**
      * instance databáze
      */
     Databaze_pojistencu(Scanner scanner) {
         pojistenci = new ArrayList<>();
+        pojistenciNemodifikovatelni = Collections.unmodifiableList(pojistenci);
         this.scanner = scanner;
+    }
+    
+    /**
+     * metoda ke zjištění, zda je databáze prázdná
+     * 
+     * @return true nebo false
+     */
+    boolean jePrazdna () {
+        return pojistenci.isEmpty();
     }
 
     /**
@@ -38,10 +50,19 @@ public class Databaze_pojistencu {
     }
 
     /**
-     * metoda pro získání záznamů pojištěnců z databáze
+     * metoda pro navrácení nemodifikovatelného seznamu záznamů pojištěnců v databázi
      * @return pojistenci
      */
     List<Pojistenec> getZaznamyPojistencu() {
-        return Collections.unmodifiableList(pojistenci);
-    }    
+        return pojistenciNemodifikovatelni;
+    }     
+    
+    /**
+     * metoda pro výpis pojištěnců
+     * @param pojistenci 
+     */
+    void vypisZaznamyPojistencu(List<Pojistenec> pojistenci) {
+            pojistenci.stream()
+                      .forEach(System.out::println);
+    }
 }
