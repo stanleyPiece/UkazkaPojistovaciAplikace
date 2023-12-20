@@ -36,25 +36,25 @@ public class Main {
             System.out.println("");
 
             switch (akce) {
-                case 1:
+                case 1 ->
                     uzivatelskeRozhrani.pridejPojistence();
-                    break;
+                    
 
-                case 2:
+                case 2 ->
                     uzivatelskeRozhrani.vypisPojistence();
-                    break;
+                    
 
-                case 3:
+                case 3 ->
                     uzivatelskeRozhrani.najdiPojistence();
-                    break;
+                    
 
-                case 4: 
-                    System.out.println("Děkuji za použití aplikace.");
-                    break;
+                case 4 ->
+                   System.out.println("Děkuji za použití aplikace.");
+                    
                 
-                default:
+                default ->
                     System.out.println("Nesprávná volba. Proveďte nový výběr.\n");
-                    break;
+                    
             }
         }        
     }

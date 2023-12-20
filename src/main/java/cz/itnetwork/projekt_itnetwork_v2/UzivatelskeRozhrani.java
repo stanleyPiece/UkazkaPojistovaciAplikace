@@ -4,7 +4,9 @@
  */
 package cz.itnetwork.projekt_itnetwork_v2;
 
+import java.util.Optional;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 /**
  *
@@ -185,17 +187,32 @@ public class UzivatelskeRozhrani {
     }
 
     /**
-     * metoda oznamující uživateli, že je databáze prázdná
+     * String oznamující uživateli, že je databáze prázdná
+     *
+     * @return Databáze pojištěnců je prázdná.
      */
     private String prazdnaDatabaze() {
         return "Databáze pojištěnců je prázdná.";
     }
 
     /**
+     * String oznamující uživateli, že pojištěnec nebyl nalezen
+     *
+     * @return Daný pojištěnec nebyl nalezen.
+     */
+    private String pojistenecNenalezen() {
+        return "\n" + "Daný pojištěnec nebyl nalezen.";
+    }
+
+    private String pojistenecNalezen() {
+        return "\n" + "Nalezený pojištěnec: ";
+    }
+
+    /**
      * metoda pro výpis pojištěnců
      */
     protected void vypisPojistence() {
-        if (pojistenciDatabaze.jePrazdna()) {
+        if (pojistenciDatabaze.jePrazdna(pojistenciDatabaze.getZaznamyPojistencu())) {
             System.out.println(prazdnaDatabaze());
         } else {
             pojistenciDatabaze.vypisZaznamyPojistencu(pojistenciDatabaze.getZaznamyPojistencu());
@@ -207,13 +224,18 @@ public class UzivatelskeRozhrani {
      * metoda pro nalezení pojištěnce
      */
     protected void najdiPojistence() {
-        if (pojistenciDatabaze.jePrazdna()) {
-            System.out.println(prazdnaDatabaze());
-        }  else if (pojistenciDatabaze.najdiZaznamPojistence(zadejJmeno(), zadejPrijmeni()) == null) {
-            System.out.println("\n" + "Daný pojištěnec nebyl nalezen."); 
-        }  else {
-            System.out.println("\n" + "Nalezený pojištěnec: " + pojistenciDatabaze.najdiZaznamPojistence(zadejJmeno(), zadejPrijmeni()));
 
+        Pojistenec hledanyPojistenec;
+
+        if (pojistenciDatabaze.jePrazdna(pojistenciDatabaze.getZaznamyPojistencu())) {
+            System.out.println(prazdnaDatabaze());
+        } else {
+            hledanyPojistenec = pojistenciDatabaze.najdiZaznamPojistence(zadejJmeno(), zadejPrijmeni());
+            if (hledanyPojistenec == null) {
+                System.out.println(pojistenecNenalezen());
+            } else {
+                System.out.println(hledanyPojistenec);
+            }
         }
         stiskniEnter();
     }

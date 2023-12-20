@@ -5,10 +5,15 @@
 package cz.itnetwork.projekt_itnetwork_v2;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+
 import java.util.stream.Stream;
+
 
 /**
  *
@@ -43,8 +48,8 @@ public class Databaze_pojistencu {
      * 
      * @return true nebo false
      */
-    protected boolean jePrazdna () {
-        return pojistenci.isEmpty();
+    protected boolean jePrazdna (Collection databaze) {
+        return databaze.isEmpty();
     }
 
     /**
@@ -68,11 +73,10 @@ public class Databaze_pojistencu {
     }
     
     protected Pojistenec najdiZaznamPojistence (String jmeno, String prijmeni) {
-            return pojistenci.stream()
-                                                               .filter(pojistenec -> pojistenec.getJmeno().equals(jmeno) &&
-                                                                       pojistenec.getPrijmeni().equals(prijmeni))
-                                                               .findFirst()
-                                                               .orElse(null);
-            
+              Optional<Pojistenec> hledanyPojistenec = pojistenci.stream()
+                                          .filter(pojistenec -> pojistenec.getJmeno().equals(jmeno) &&
+                                                  pojistenec.getPrijmeni().equals(prijmeni))
+                                          .findFirst();
+                return hledanyPojistenec.orElse(null);
     }    
 }
