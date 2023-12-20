@@ -234,7 +234,7 @@ public class UzivatelskeRozhrani {
             if (hledanyPojistenec == null) {
                 System.out.println(pojistenecNenalezen());
             } else {
-                System.out.println(hledanyPojistenec);
+                System.out.println(pojistenecNalezen() + hledanyPojistenec);
             }
         }
         stiskniEnter();
