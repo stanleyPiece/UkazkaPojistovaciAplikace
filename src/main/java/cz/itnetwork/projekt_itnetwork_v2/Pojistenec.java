@@ -49,7 +49,7 @@ public class Pojistenec {
      * getter potřebný ke správnému fungování metody k nalezení pojištěného v databázi
      * @return jmeno
      */
-    String getJmeno() {
+    protected String getJmeno() {
         return jmeno;
     }
 
@@ -57,7 +57,7 @@ public class Pojistenec {
      * getter potřebný ke správnému fungování metody k nalezení pojištěného v databázi
      * @return prijmeni
      */
-    String getPrijmeni() {
+    protected String getPrijmeni() {
         return prijmeni;
     }
 

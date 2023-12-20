@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 /**
  *
@@ -30,11 +31,19 @@ public class Databaze_pojistencu {
     }
     
     /**
+     * metoda pro navrácení nemodifikovatelného seznamu záznamů pojištěnců v databázi
+     * @return pojistenci
+     */
+    protected List<Pojistenec> getZaznamyPojistencu() {
+        return pojistenciNemodifikovatelni;
+    }
+    
+    /**
      * metoda ke zjištění, zda je databáze prázdná
      * 
      * @return true nebo false
      */
-    boolean jePrazdna () {
+    protected boolean jePrazdna () {
         return pojistenci.isEmpty();
     }
 
@@ -45,24 +54,25 @@ public class Databaze_pojistencu {
      * @param telefonniCislo
      * @param vek
      */
-    void vlozZaznamPojistence(String jmeno, String prijmeni, int vek, String telefonniCislo) {
+    protected void vlozZaznamPojistence(String jmeno, String prijmeni, int vek, String telefonniCislo) {
         pojistenci.add(new Pojistenec(jmeno, prijmeni, vek, telefonniCislo));
-    }
-
-    /**
-     * metoda pro navrácení nemodifikovatelného seznamu záznamů pojištěnců v databázi
-     * @return pojistenci
-     */
-    List<Pojistenec> getZaznamyPojistencu() {
-        return pojistenciNemodifikovatelni;
-    }     
+    }        
     
     /**
      * metoda pro výpis pojištěnců
      * @param pojistenci 
      */
-    void vypisZaznamyPojistencu(List<Pojistenec> pojistenci) {
+    protected void vypisZaznamyPojistencu(List<Pojistenec> pojistenci) {
             pojistenci.stream()
                       .forEach(System.out::println);
     }
+    
+    protected Pojistenec najdiZaznamPojistence (String jmeno, String prijmeni) {
+            return pojistenci.stream()
+                                                               .filter(pojistenec -> pojistenec.getJmeno().equals(jmeno) &&
+                                                                       pojistenec.getPrijmeni().equals(prijmeni))
+                                                               .findFirst()
+                                                               .orElse(null);
+            
+    }    
 }

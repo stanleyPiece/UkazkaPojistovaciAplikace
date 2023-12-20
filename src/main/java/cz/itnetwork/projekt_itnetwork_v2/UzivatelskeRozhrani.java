@@ -29,7 +29,7 @@ public class UzivatelskeRozhrani {
     /**
      * metoda pro zobrazení úvodní obrazovky
      */
-    void zobrazUvodniObrazovku() {
+    protected void zobrazUvodniObrazovku() {
         System.out.println("–––––––––––––––––––––––––––––––––");
         System.out.println("Evidence pojištěných");
         System.out.println("–––––––––––––––––––––––––––––––––");
@@ -47,7 +47,7 @@ public class UzivatelskeRozhrani {
      * @param analyzovanyText
      * @return true nebo false
      */
-    boolean obsahujeCislici(String analyzovanyText) {
+    private boolean obsahujeCislici(String analyzovanyText) {
         char[] cislice = analyzovanyText.toCharArray();
         for (char znak : cislice) {
             if (Character.isDigit(znak)) {
@@ -64,7 +64,7 @@ public class UzivatelskeRozhrani {
      * @param analyzovanyText
      * @return true nebo false
      */
-    boolean jePrazdny(String analyzovanyText) {
+    private boolean jePrazdny(String analyzovanyText) {
         return analyzovanyText.equals("");
     }
 
@@ -136,7 +136,6 @@ public class UzivatelskeRozhrani {
      * @return telefonPojisteneho
      */
     private String zadejTelefon() {
-
         /**
          * kontrola, zda uživatel správně zadal telefonní číslo
          */
@@ -160,7 +159,6 @@ public class UzivatelskeRozhrani {
      * @return vekPojisteneho
      */
     private int zadejVek() {
-
         /**
          * kontrola, zda uživatel správně zadal věk
          */
@@ -181,56 +179,49 @@ public class UzivatelskeRozhrani {
     /**
      * metoda pro přidání pojištěnce
      */
-    void pridejPojistence() {
-
+    protected void pridejPojistence() {
         pojistenciDatabaze.vlozZaznamPojistence(zadejJmeno(), zadejPrijmeni(), zadejVek(), zadejTelefon());
         stiskniEnter();
-
     }
 
     /**
      * metoda oznamující uživateli, že je databáze prázdná
      */
-    String prazdnaDatabaze() {
+    private String prazdnaDatabaze() {
         return "Databáze pojištěnců je prázdná.";
     }
 
     /**
      * metoda pro výpis pojištěnců
      */
-    void vypisPojistence() {
-
+    protected void vypisPojistence() {
         if (pojistenciDatabaze.jePrazdna()) {
             System.out.println(prazdnaDatabaze());
         } else {
-            pojistenciDatabaze.vypisZaznamyPojistencu(pojistenciDatabaze.getZaznamyPojistencu());                              
+            pojistenciDatabaze.vypisZaznamyPojistencu(pojistenciDatabaze.getZaznamyPojistencu());
         }
         stiskniEnter();
-
     }
 
     /**
      * metoda pro nalezení pojištěnce
      */
-    void najdiPojistence() {
-        if (!pojistenciDatabaze.getZaznamyPojistencu().isEmpty()) {
-            for (Pojistenec pojistenec : pojistenciDatabaze.getZaznamyPojistencu()) {
-                if ((zadejJmeno().equals(pojistenec.getJmeno())) && (zadejPrijmeni().equals(pojistenec.getPrijmeni()))) {
-                    System.out.println("\n" + ("Nalezený pojištěnec: " + pojistenec));
-                    stiskniEnter();
-                } else {
-                    System.out.println("\n" + "Daný pojištěnec nebyl nalezen.");
-                }
-            }
-        } else {
-            System.out.println("Databáze pojištěnců je prázdná.");
+    protected void najdiPojistence() {
+        if (pojistenciDatabaze.jePrazdna()) {
+            System.out.println(prazdnaDatabaze());
+        }  else if (pojistenciDatabaze.najdiZaznamPojistence(zadejJmeno(), zadejPrijmeni()) == null) {
+            System.out.println("\n" + "Daný pojištěnec nebyl nalezen."); 
+        }  else {
+            System.out.println("\n" + "Nalezený pojištěnec: " + pojistenciDatabaze.najdiZaznamPojistence(zadejJmeno(), zadejPrijmeni()));
+
         }
+        stiskniEnter();
     }
 
     /**
      * metoda vyzývající uživatele k pokračování stisknutím klávesy Enter
      */
-    void stiskniEnter() {
+    private void stiskniEnter() {
 
         while (true) {
             System.out.println("");
