@@ -64,7 +64,7 @@ public class Databaze_pojistencu {
     }        
     
     /**
-     * metoda pro výpis pojištěnců
+     * metoda pro výpis záznamů pojištěnců
      * @param pojistenci 
      */
     protected void vypisZaznamyPojistencu(List<Pojistenec> pojistenci) {
@@ -72,6 +72,12 @@ public class Databaze_pojistencu {
                       .forEach(System.out::println);
     }
     
+    /**
+     * metoda pro nalezení záznamu pojištěnce
+     * @param jmeno
+     * @param prijmeni
+     * @return 
+     */
     protected Pojistenec najdiZaznamPojistence (String jmeno, String prijmeni) {
               Optional<Pojistenec> hledanyPojistenec = pojistenci.stream()
                                           .filter(pojistenec -> pojistenec.getJmeno().equals(jmeno) &&
