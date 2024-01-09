@@ -81,7 +81,7 @@ public class UzivatelskeRozhrani {
          */
         spravneZadani = false;
         String jmenoPojisteneho = "";
-        while (!spravneZadani) {
+        do {
             System.out.println("Zadejte jméno pojištěnce:");
             try {
                 jmenoPojisteneho = scanner.nextLine().trim();
@@ -97,7 +97,7 @@ public class UzivatelskeRozhrani {
             } catch (Exception vyjimka) {
                 System.out.println("Chybně zadané jméno.");
             }
-        }
+        } while (!spravneZadani);
         return jmenoPojisteneho;
     }
 
@@ -112,7 +112,7 @@ public class UzivatelskeRozhrani {
          */
         spravneZadani = false;
         String prijmeniPojisteneho = "";
-        while (!spravneZadani) {
+        do {
             System.out.println("Zadejte příjmení pojištěnce:");
             try {
                 prijmeniPojisteneho = scanner.nextLine().trim();
@@ -128,7 +128,7 @@ public class UzivatelskeRozhrani {
             } catch (Exception vyjimka) {
                 System.out.println("Chybně zadané příjmení.");
             }
-        }
+        } while (!spravneZadani);
         return prijmeniPojisteneho;
     }
 
@@ -143,7 +143,7 @@ public class UzivatelskeRozhrani {
          */
         String telefonPojisteneho = "";
         spravneZadani = false;
-        while (!spravneZadani) {
+        do {
             System.out.println("Zadejte telefonní číslo pojištěnce:");
             try {
                 telefonPojisteneho = scanner.nextLine();
@@ -151,7 +151,7 @@ public class UzivatelskeRozhrani {
             } catch (Exception vyjimka) {
                 System.out.println("Chybně zadané telefonní číslo.");
             }
-        }
+        } while (!spravneZadani);
         return telefonPojisteneho;
     }
 
@@ -166,7 +166,7 @@ public class UzivatelskeRozhrani {
          */
         int vekPojisteneho = 0;
         spravneZadani = false;
-        while (!spravneZadani) {
+        do {
             System.out.println("Zadejte věk pojištěnce:");
             try {
                 vekPojisteneho = Integer.parseInt(scanner.nextLine());
@@ -174,7 +174,7 @@ public class UzivatelskeRozhrani {
             } catch (Exception vyjimka) {
                 System.out.println("Chybně zadaný věk.");
             }
-        }
+        } while (!spravneZadani);
         return vekPojisteneho;
     }
 

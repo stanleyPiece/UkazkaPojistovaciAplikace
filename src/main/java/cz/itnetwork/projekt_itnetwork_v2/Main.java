@@ -25,7 +25,7 @@ public class Main {
         /**
          * kontrola, zda uživatel zadal číslo, a ne například písmeno
          */
-        while ((akce != 4)) {
+        do {
             uzivatelskeRozhrani.zobrazUvodniObrazovku();
             try {
                 akce = Integer.parseInt(scanner.nextLine());
@@ -56,7 +56,7 @@ public class Main {
                     System.out.println("Nesprávná volba. Proveďte nový výběr.\n");
                     
             }
-        }        
+        }  while ((akce != 4));      
     }
 
     public static void main(String[] args) {
