@@ -10,9 +10,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
-import java.util.stream.Collectors;
-
-import java.util.stream.Stream;
 
 
 /**
@@ -41,16 +38,7 @@ public class Databaze_pojistencu {
      */
     protected List<Pojistenec> getZaznamyPojistencu() {
         return pojistenciNemodifikovatelni;
-    }
-    
-    /**
-     * metoda ke zjištění, zda je databáze prázdná
-     * 
-     * @return true nebo false
-     */
-    protected boolean jePrazdna (Collection databaze) {
-        return databaze.isEmpty();
-    }
+    }        
 
     /**
      * metoda pro vložení záznamu pojištěnce do databáze

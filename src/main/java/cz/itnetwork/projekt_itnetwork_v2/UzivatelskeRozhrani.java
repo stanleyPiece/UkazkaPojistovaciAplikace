@@ -4,9 +4,8 @@
  */
 package cz.itnetwork.projekt_itnetwork_v2;
 
-import java.util.Optional;
 import java.util.Scanner;
-import java.util.stream.Stream;
+
 
 /**
  *
@@ -212,7 +211,7 @@ public class UzivatelskeRozhrani {
      * metoda pro výpis pojištěnců
      */
     protected void vypisPojistence() {
-        if (pojistenciDatabaze.jePrazdna(pojistenciDatabaze.getZaznamyPojistencu())) {
+        if (pojistenciDatabaze.getZaznamyPojistencu().isEmpty()) {
             System.out.println(prazdnaDatabaze());
         } else {
             pojistenciDatabaze.vypisZaznamyPojistencu(pojistenciDatabaze.getZaznamyPojistencu());
@@ -227,7 +226,7 @@ public class UzivatelskeRozhrani {
 
         Pojistenec hledanyPojistenec;
 
-        if (pojistenciDatabaze.jePrazdna(pojistenciDatabaze.getZaznamyPojistencu())) {
+        if (pojistenciDatabaze.getZaznamyPojistencu().isEmpty()) {
             System.out.println(prazdnaDatabaze());
         } else {
             hledanyPojistenec = pojistenciDatabaze.najdiZaznamPojistence(zadejJmeno(), zadejPrijmeni());
