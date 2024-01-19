@@ -202,7 +202,12 @@ public class UzivatelskeRozhrani {
     private String pojistenecNenalezen() {
         return "\n" + "Daný pojištěnec nebyl nalezen.";
     }
-
+    
+    /**
+     * String oznamující uživateli, že pojištěnec byl nalezen
+     *
+     * @return Daný pojištěnec nebyl nalezen.
+     */
     private String pojistenecNalezen() {
         return "\n" + "Nalezený pojištěnec: ";
     }
